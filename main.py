@@ -50,13 +50,28 @@ def print_board(board):
     for row in board:
         print(" ".join(row))
 
-class Piece:
-    def __init__(self, color, name):
-        self.color = color
-        self.name = name
 
-    def cheak_target
+def moveable(board, roco):
+    temp = list(roco)
+    row = 8 - temp[1]
+    col = ord(temp[0].upper()) - 65
+    # 사용자가 입력한 좌표 리스트에 넣을 수 있게 변환(대문자 기준)
+    
+    temp = board[row][col].split("_")
+    ucamp = temp[0].upper()
+    upiece = temp[1].upper()
+    # 사용자 색: ucamp, 사용자 기물: upiece
 
+    if ucamp == "W":
+        if upiece == "K":
+            board[row-1][col-1] = "O"
+            board[row-1][col] = "O"
+            board[row-1][col+1] = "O"
+            board[row][col-1] = "O"
+            board[row][col+1] = "O"
+            board[row+1][col-1] = "O"
+            board[row+1][col] = "O"
+            board[row+1][col+1] = "O"
 
 
 
@@ -64,6 +79,22 @@ class Piece:
 def main():
     print_board(init_board())
 
+    while True:
+        pick = input()
+        moveable(board, pick)
+
+
+
+'''
+계획
+1. 보드 초기화
+2. 무한 반복문
+3. 좌표 입력으로 해당 기물 선택
+4. 좌표 입력 시 해당 칸에 있는 기물이 이동할 수 있는 칸 출력(기물 없는 칸or상대 기물 선택 시 다시 입력하세요 출력)(상대 기물 잡기 가능 시 상대 기물 표시 소문자로 변경)
+5. 이동 가능한 칸 좌표 입력 시 해당 행동 수행(다른 기물 선택 시 4로 이동)
+6. 상대 턴 3으로 이동
+7. 승리조건(체크메이트) 달성 시 반복문 탈출 and 게임 종료
+'''
 
 # ------------------------------------------------------------
 # 3. 프로그램 실행
